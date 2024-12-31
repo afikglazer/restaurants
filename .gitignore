@@ -16,3 +16,7 @@ username-terraform/.terraform/providers/registry.terraform.io/hashicorp/azurerm/
 container-terraform/.terraform/providers/registry.terraform.io/hashicorp/azurerm/4.14.0/windows_amd64/LICENSE.txt
 
 container-terraform/.terraform/providers/registry.terraform.io/hashicorp/azurerm/4.14.0/windows_amd64/terraform-provider-azurerm_v4.14.0_x5.exe
+
+container-terraform/terraform.tfstate
+
+container-terraform/terraform.tfstate.backup
