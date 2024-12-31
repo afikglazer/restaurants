@@ -52,4 +52,16 @@ resource "azurerm_container_app" "app" {
       }
     }
   }
+
+ingress {
+  external_enabled           = true
+  allow_insecure_connections = true
+  target_port                = 80
+
+  traffic_weight {
+    latest_revision = true    # Specifies the traffic should go to the latest revision
+    percentage      = 100     # Assign 100% of the traffic to the latest revision
+  }
+}
+
 }
