@@ -47,21 +47,30 @@ resource "azurerm_container_app" "app" {
       cpu    = "0.25"    # Correct CPU format
       memory = "0.5Gi"   # Correct memory format
       env {
-        name  = "afik_ENV_VAR"
-        value = "Hello, World!"
+        name  = "AFIK"
+        value = "12345"
+      }
+      env {
+        name        = "COSMOSDB_SK"
+        secret_name = "cas-cosmosdb-sk" # Use only the secret name without "secretref:"
       }
     }
   }
 
-ingress {
-  external_enabled           = true
-  allow_insecure_connections = true
-  target_port                = 80
+  ingress {
+    external_enabled           = true
+    allow_insecure_connections = true
+    target_port                = 80
 
-  traffic_weight {
-    latest_revision = true    # Specifies the traffic should go to the latest revision
-    percentage      = 100     # Assign 100% of the traffic to the latest revision
+    traffic_weight {
+      latest_revision = true    # Specifies the traffic should go to the latest revision
+      percentage      = 100     # Assign 100% of the traffic to the latest revision
+    }
   }
-}
+
+  secret {
+    name  = "cas-cosmosdb-sk"
+    value = "your-secret-value" # Replace with the actual secret value
+  }
 
 }
