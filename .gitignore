@@ -20,3 +20,7 @@ container-terraform/.terraform/providers/registry.terraform.io/hashicorp/azurerm
 container-terraform/terraform.tfstate
 
 container-terraform/terraform.tfstate.backup
+
+cosmosdb-nosql-try2/.terraform/providers/registry.terraform.io/hashicorp/azurerm/4.14.0/windows_amd64/LICENSE.txt
+
+cosmosdb-nosql-try2/.terraform/providers/registry.terraform.io/hashicorp/azurerm/4.14.0/windows_amd64/terraform-provider-azurerm_v4.14.0_x5.exe
