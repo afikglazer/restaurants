@@ -43,7 +43,7 @@ resource "azurerm_container_app" "app" {
   template {
     container {
       name   = "afik-container"
-      image  = "nginx:latest" # Replace with your container image
+      image  = "afik23/flask:latest" # Replace with your container image
       cpu    = "0.25"    # Correct CPU format
       memory = "0.5Gi"   # Correct memory format
       env {
@@ -60,7 +60,7 @@ resource "azurerm_container_app" "app" {
   ingress {
     external_enabled           = true
     allow_insecure_connections = true
-    target_port                = 80
+    target_port                = 5000
 
     traffic_weight {
       latest_revision = true    # Specifies the traffic should go to the latest revision
