@@ -20,7 +20,7 @@ data "azurerm_resource_group" "existing_rg" {
 
 resource "azurerm_log_analytics_workspace" "log_analytics" {
   name                = "afik-log-analytics"
-  location            = data.azurerm_resource_group.existing_rg.location
+  location            = "Central US"
   resource_group_name = data.azurerm_resource_group.existing_rg.name
   sku                 = "PerGB2018"
   retention_in_days   = 30
@@ -28,7 +28,7 @@ resource "azurerm_log_analytics_workspace" "log_analytics" {
 
 resource "azurerm_container_app_environment" "env" {
   name                     = "afik-container-app-env"
-  location                 = data.azurerm_resource_group.existing_rg.location
+  location                 = "Central US"
   resource_group_name      = data.azurerm_resource_group.existing_rg.name
   log_analytics_workspace_id = azurerm_log_analytics_workspace.log_analytics.id
 }
