@@ -5,7 +5,7 @@ COPY main.py /
 
 # Install any needed packages specified in requirements.txt
 # If you have other dependencies, list them in a requirements.txt file
-RUN pip install --no-cache-dir boto3 flask
+RUN pip install --no-cache-dir boto3 flask azure.cosmos
 
 EXPOSE 5000
 

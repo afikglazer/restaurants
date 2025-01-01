@@ -51,7 +51,7 @@ resource "azurerm_container_app" "app" {
         value = "12345"
       }
       env {
-        name        = "COSMOSDB_SK"
+        name        = "LAB001-COSMOS"
         secret_name = "cas-cosmosdb-sk" # Use only the secret name without "secretref:"
       }
     }
