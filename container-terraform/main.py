@@ -7,6 +7,7 @@ import os
 app = Flask(__name__)
 
 def wrRecord(sentParams: dict):
+    print("degel")
     endpoint = "https://afik-cosmosdb-nosql.documents.azure.com:443/"
     key = os.getenv("LAB001-COSMOS")
     database_name = "container-requests"
@@ -14,12 +15,18 @@ def wrRecord(sentParams: dict):
     client = CosmosClient(endpoint, key)
     database = client.get_database_client(database_name)
     container = database.get_container_client(container_name)
-
+    print(sentParams)
+    print(sentParams)
+    print(sentParams)
+    print(sentParams)
+    print(sentParams)
     record = {
-        "id": int(time.time() * 1000),  # UNIX timestamp in milliseconds
+        "id": str(int(time.time() * 1000)),  # UNIX timestamp in milliseconds
         "message": sentParams
     }
+    print(record)
 
+    
     try:
         container.upsert_item(record)
         print("Record inserted successfully.")
@@ -57,6 +64,7 @@ def recommend_restaurant():
     style = query_params.get('style')
     vegetarian = query_params.get('vegetarian')
     open_now = query_params.get('openNow', 'false').lower() == 'true'
+    wrRecord(sentParams=query_params)
 
     for restaurant in restaurants:
         if style and restaurant['style'].lower() != style.lower():
@@ -66,7 +74,6 @@ def recommend_restaurant():
         if open_now and not is_open_now(restaurant['openHour'], restaurant['closeHour']):
             continue
 
-        wrRecord(sentParams=query_params)
         return jsonify({
             "restaurantRecommendation": {
                 "name": restaurant['name'],
