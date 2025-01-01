@@ -13,31 +13,30 @@ terraform {
   }
 }
 
-resource "azurerm_resource_group" "rg" {
-  name     = "afik-container-app-rg"
-  location = "East US"
+# Reference the existing resource group using a data block
+data "azurerm_resource_group" "existing_rg" {
+  name = "azme_afik_glazer_rg"  # Name of your existing resource group
 }
 
 resource "azurerm_log_analytics_workspace" "log_analytics" {
   name                = "afik-log-analytics"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
+  location            = data.azurerm_resource_group.existing_rg.location
+  resource_group_name = data.azurerm_resource_group.existing_rg.name
   sku                 = "PerGB2018"
   retention_in_days   = 30
 }
 
 resource "azurerm_container_app_environment" "env" {
-  name                = "afik-container-app-env"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
-
+  name                     = "afik-container-app-env"
+  location                 = data.azurerm_resource_group.existing_rg.location
+  resource_group_name      = data.azurerm_resource_group.existing_rg.name
   log_analytics_workspace_id = azurerm_log_analytics_workspace.log_analytics.id
 }
 
 resource "azurerm_container_app" "app" {
   name                           = "afik-container-app"
   container_app_environment_id   = azurerm_container_app_environment.env.id
-  resource_group_name            = azurerm_resource_group.rg.name
+  resource_group_name            = data.azurerm_resource_group.existing_rg.name
   revision_mode                  = "Single"  # Choose "Single" or "Multiple"
 
   template {
@@ -72,5 +71,4 @@ resource "azurerm_container_app" "app" {
     name  = "cas-cosmosdb-sk"
     value = "your-secret-value" # Replace with the actual secret value
   }
-
 }
