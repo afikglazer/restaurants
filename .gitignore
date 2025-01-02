@@ -20,3 +20,7 @@ terraform.tfstate.backup
 cosmosdb-try3/.terraform/providers/registry.terraform.io/hashicorp/azurerm/4.14.0/windows_amd64/LICENSE.txt
 
 cosmosdb-try3/.terraform/providers/registry.terraform.io/hashicorp/azurerm/4.14.0/windows_amd64/terraform-provider-azurerm_v4.14.0_x5.exe
+
+clean/.terraform/providers/registry.terraform.io/hashicorp/azurerm/4.14.0/windows_amd64/LICENSE.txt
+
+clean/.terraform/providers/registry.terraform.io/hashicorp/azurerm/4.14.0/windows_amd64/terraform-provider-azurerm_v4.14.0_x5.exe

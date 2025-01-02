@@ -5,14 +5,20 @@ variable "subscription_id" {
   default = "2a43cdb3-2031-4411-8951-551e7e525852"
 }
 
-variable "cosmosdb_secret" {
-  description = "The Cosmos DB secret"
-  type        = string
-  sensitive   = true
-  default = "your-secret-value"
-}
+# variable "cosmosdb_secret" {
+#   description = "The Cosmos DB secret"
+#   type        = string
+#   sensitive   = true
+#   default = "your-secret-value"
+# }
 
 variable "resource_group_name" {
+  description = "The name of the resource group"
+  type        = string
+  default     = "azme_afik_glazer_rg"
+}
+
+variable "resource_group_name2" {
   description = "The name of the resource group"
   type        = string
   default     = "afik-container-app-rg"
