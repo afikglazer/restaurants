@@ -53,6 +53,8 @@ def is_open_now(open_hour, close_hour):
 def recommend_restaurant():
     query_params = request.args
 
+    wrRecord(sentParams=query_params)
+
     style = query_params.get('style')
     vegetarian = query_params.get('vegetarian')
     open_now = query_params.get('openNow', 'false').lower() == 'true'  # Default to False if openNow is not provided
