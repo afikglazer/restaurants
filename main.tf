@@ -25,9 +25,10 @@ data "azurerm_key_vault_secret" "example" {
   key_vault_id = data.azurerm_key_vault.existing.id
 }
 
-# output "secret_id" {
-#   value = data.azurerm_key_vault_secret.example.id
-# }
+data "azurerm_key_vault_secret" "dockerhub-password" {
+  name         = "dockerhub-password"  # Replace with the name of the secret you want
+  key_vault_id = data.azurerm_key_vault.existing.id
+}
 
 
 resource "azurerm_resource_group" "rg" {
@@ -84,6 +85,11 @@ resource "azurerm_container_app" "app" {
   secret {
     name  = "cas-cosmosdb-sk"
     value = data.azurerm_key_vault_secret.example.value # Import/Get secret value from Key Vault
+  }
+
+  secret {
+    name  = "dockerhub-password"
+    value = data.azurerm_key_vault_secret.dockerhub-password.value # Import/Get secret value from Key Vault
   }
 
 }
