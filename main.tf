@@ -83,7 +83,7 @@ resource "azurerm_container_app" "app" {
 
   secret {
     name  = "cas-cosmosdb-sk"
-    value = data.azurerm_key_vault_secret.example.value # Replace with the actual secret value in the console
+    value = data.azurerm_key_vault_secret.example.value # Import/Get secret value from Key Vault
   }
 
 }
