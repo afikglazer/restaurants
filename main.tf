@@ -25,9 +25,9 @@ data "azurerm_key_vault_secret" "example" {
   key_vault_id = data.azurerm_key_vault.existing.id
 }
 
-output "secret_id" {
-  value = data.azurerm_key_vault_secret.example.id
-}
+# output "secret_id" {
+#   value = data.azurerm_key_vault_secret.example.id
+# }
 
 
 resource "azurerm_resource_group" "rg" {

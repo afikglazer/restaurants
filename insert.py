@@ -2,7 +2,7 @@ from azure.cosmos import CosmosClient, PartitionKey
 import os
 
 # Your Cosmos DB connection details
-url = "https://afik-cosmosdb-nosql.documents.azure.com:443/"
+url = "https://afik-cosmosdb-nosql-account.documents.azure.com:443/"
 primary_key = os.getenv("LAB001-COSMOS")  # Replace with your actual primary key
 database_name = "afik-cosmosdb-nosql-db-1"  # The name of your database
 container_name = "afik-cosmosdb-nosql-container-1"  # The name of your container

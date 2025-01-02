@@ -7,9 +7,9 @@ import os
 app = Flask(__name__)
 
 def wrRecord(sentParams: dict):
-    endpoint = "https://afik-cosmosdb-nosql.documents.azure.com:443/"
+    endpoint = "https://afik-cosmosdb-nosql-account.documents.azure.com:443/"
     key = os.getenv("LAB001-COSMOS")
-    database_name = "container-requests"
+    database_name = "container-requests-db"
     container_name = "container-requests"
     client = CosmosClient(endpoint, key)
     database = client.get_database_client(database_name)
@@ -26,7 +26,7 @@ def wrRecord(sentParams: dict):
         print(f"An error occurred: {e}")
 
 def getDocumentDataSet() -> list:
-    endpoint = "https://afik-cosmosdb-nosql.documents.azure.com:443/"
+    endpoint = "https://afik-cosmosdb-nosql-account.documents.azure.com:443/"
     key = os.getenv("LAB001-COSMOS")
     database_name = "afik-cosmosdb-nosql-db-1"
     container_name = "afik-cosmosdb-nosql-container-1"
