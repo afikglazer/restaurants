@@ -65,9 +65,6 @@ resource "azurerm_container_app" "app" {
   }
 }
 
-#----------------------------------
-
-
 resource "azurerm_cosmosdb_account" "afik-cosmosdb-nosql-account" {
   name                = "afik-cosmosdb-nosql-account"
   location            = var.location
@@ -90,15 +87,10 @@ resource "azurerm_cosmosdb_account" "afik-cosmosdb-nosql-account" {
 
   public_network_access_enabled = true
   analytical_storage_enabled = false
-  free_tier_enabled          = false
-
-  # tags = {
-  #   defaultExperience    = "Core (SQL)"
-  #   hidden-cosmos-mmspecial = ""
-  # }
+  free_tier_enabled          = true
 
   capacity {
-    total_throughput_limit = 1600
+    total_throughput_limit = var.throughput * 4
   }
 }
 
@@ -106,7 +98,7 @@ resource "azurerm_cosmosdb_sql_database" "afik-cosmosdb-nosql-db-1" {
   name                = "afik-cosmosdb-nosql-db-1"
   resource_group_name = data.azurerm_resource_group.rg.name
   account_name        = azurerm_cosmosdb_account.afik-cosmosdb-nosql-account.name
-  throughput          = 400
+  throughput          = var.throughput
 }
 
 resource "azurerm_cosmosdb_sql_container" "afik-cosmosdb-nosql-container-1" {
@@ -114,7 +106,7 @@ resource "azurerm_cosmosdb_sql_container" "afik-cosmosdb-nosql-container-1" {
   resource_group_name = data.azurerm_resource_group.rg.name
   account_name        = azurerm_cosmosdb_account.afik-cosmosdb-nosql-account.name
   database_name       = azurerm_cosmosdb_sql_database.afik-cosmosdb-nosql-db-1.name
-  throughput          = 400
+  throughput          = var.throughput
 
   partition_key_paths   = ["/id"]
   partition_key_version    = 1
@@ -125,7 +117,7 @@ resource "azurerm_cosmosdb_sql_database" "container-requests-db" {
   name                = "container-requests-db"
   resource_group_name = data.azurerm_resource_group.rg.name
   account_name        = azurerm_cosmosdb_account.afik-cosmosdb-nosql-account.name
-  throughput          = 400
+  throughput          = var.throughput
 }
 
 resource "azurerm_cosmosdb_sql_container" "container-requests" {
@@ -133,7 +125,7 @@ resource "azurerm_cosmosdb_sql_container" "container-requests" {
   resource_group_name = data.azurerm_resource_group.rg.name
   account_name        = azurerm_cosmosdb_account.afik-cosmosdb-nosql-account.name
   database_name       = azurerm_cosmosdb_sql_database.container-requests-db.name
-  throughput          = 400
+  throughput          = var.throughput
 
   partition_key_paths   = ["/id"]
   partition_key_version    = 1

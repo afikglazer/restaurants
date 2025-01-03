@@ -35,3 +35,9 @@ variable "revision_mode" {
   type        = string
   default     = "Single"
 }
+
+variable "throughput" {
+  description = "thoughput property"
+  type = number
+  default = 400
+}
